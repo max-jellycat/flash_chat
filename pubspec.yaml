@@ -1,0 +1,35 @@
+name: flash_chat
+description: A new Flutter application.
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+  - images/
+
+  fonts:
+    - family: "SourceSansPro"
+      fonts:
+        - asset: 'fonts/SourceSansPro-Regular.ttf'
+        - asset: 'fonts/SourceSansPro-700.ttf'
+          weight: 700
+        - asset: 'fonts/SourceSansPro-900.ttf'
+          weight: 900
