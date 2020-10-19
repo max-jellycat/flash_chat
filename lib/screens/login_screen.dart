@@ -1,6 +1,6 @@
 import "package:flash_chat/widgets/action_button.dart";
 import "package:flutter/material.dart";
-import "package:flash_chat/utils/constants.dart";
+import 'package:flash_chat/utils/theme.dart';
 import "package:flash_chat/widgets/form_input.dart";
 
 class LoginScreen extends StatefulWidget {
@@ -46,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ActionButton(
               onPressed: () {},
               backgroundColor: kPrimaryColor,
-              color: kLightColor,
               text: "Log In",
             )
           ],

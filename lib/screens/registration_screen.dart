@@ -1,6 +1,6 @@
 import "package:flash_chat/widgets/form_input.dart";
 import "package:flutter/material.dart";
-import "package:flash_chat/utils/constants.dart";
+import 'package:flash_chat/utils/theme.dart';
 import "package:flash_chat/widgets/action_button.dart";
 
 class RegistrationScreen extends StatefulWidget {
@@ -46,7 +46,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ActionButton(
               onPressed: () {},
               backgroundColor: kAccentColor,
-              color: kLightColor,
               text: "Register",
             )
           ],

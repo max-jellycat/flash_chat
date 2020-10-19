@@ -27,14 +27,30 @@ const kMessageContainerDecoration = BoxDecoration(
 
 const kFormInputStyle = TextStyle(
   fontSize: kSizeMedium,
+  color: kDarkColor,
 );
 
 const kFormInputDecoration = InputDecoration(
   contentPadding: EdgeInsets.all(kSizeMedium),
-  filled: true,
-  fillColor: kDarkColor,
+  hintStyle: TextStyle(
+    fontSize: kSizeMedium,
+    color: kGreyColor,
+  ),
   border: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(kSizeSmall)),
-    borderSide: BorderSide.none,
+  ),
+  enabledBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(kSizeSmall)),
+    borderSide: BorderSide(
+      color: kDarkColor,
+      width: 2.0,
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(kSizeSmall)),
+    borderSide: BorderSide(
+      color: kAccentColor,
+      width: 2.0,
+    ),
   ),
 );

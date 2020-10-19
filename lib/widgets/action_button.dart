@@ -1,3 +1,4 @@
+import 'package:flash_chat/utils/theme.dart';
 import "package:flutter/material.dart";
 
 const _kElevation = 6.0;
@@ -13,9 +14,9 @@ class ActionButton extends StatelessWidget {
 
   ActionButton({
     @required this.text,
+    @required this.onPressed,
     this.backgroundColor,
     this.color,
-    this.onPressed,
     this.isSmall,
   });
 
@@ -25,13 +26,13 @@ class ActionButton extends StatelessWidget {
       elevation: _kElevation,
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(_kRadius)),
-      fillColor: this.backgroundColor,
+      fillColor: this.backgroundColor ?? kGreyColor,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Text(
           this.text,
           style: TextStyle(
-            color: this.color,
+            color: this.color ?? kLightColor,
             fontSize: _kTextSize,
             fontWeight: FontWeight.w700,
           ),

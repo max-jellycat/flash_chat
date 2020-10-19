@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:flash_chat/utils/constants.dart";
+import 'package:flash_chat/utils/theme.dart';
 import "package:flash_chat/utils/router.dart";
 import "package:flash_chat/screens/welcome_screen.dart";
 import "package:flash_chat/screens/login_screen.dart";
@@ -13,11 +13,7 @@ class FlashChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          brightness: Brightness.dark,
           fontFamily: "SourceSansPro",
-          textTheme: TextTheme(
-            bodyText2: TextStyle(color: kDarkColor),
-          ),
         ),
         initialRoute: WelcomeScreenRoute,
         routes: {
