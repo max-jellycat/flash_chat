@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flash_chat/widgets/action_button.dart';
-import 'package:flash_chat/utils/constants.dart';
+import "package:flutter/material.dart";
+import "package:flash_chat/utils/router.dart";
+import "package:flash_chat/utils/constants.dart";
+import "package:flash_chat/widgets/action_button.dart";
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -20,12 +21,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Container(
-                  child: Image.asset('images/logo.png'),
-                  height: kSizeUber,
+                Hero(
+                  tag: "logo",
+                  child: Container(
+                    child: Image.asset("images/logo.png"),
+                    height: kSizeUber,
+                  ),
                 ),
                 Text(
-                  'Flash Chat',
+                  "Flash Chat",
                   style: TextStyle(
                     fontSize: kSizeHuge,
                     fontWeight: FontWeight.w900,
@@ -38,19 +42,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               height: kSizeHuge,
             ),
             ActionButton(
-              text: 'Log in',
+              text: "Log in",
               backgroundColor: kPrimaryColor,
               color: kLightColor,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, LoginScreenRoute);
+              },
             ),
             SizedBox(
               height: kSizeLarge,
             ),
             ActionButton(
-              text: 'Register',
+              text: "Register",
               backgroundColor: kGreyColor,
               color: kLightColor,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, RegisterScreenRoute);
+              },
             ),
           ],
         ),

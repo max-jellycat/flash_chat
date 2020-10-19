@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 const kPrimaryColor = Color(0xFFF1C40F);
 const kAccentColor = Color(0xFF3498DB);
@@ -15,7 +15,7 @@ const kSizeUber = 64.0;
 
 const kMessageTextFieldDecoration = InputDecoration(
   contentPadding: EdgeInsets.all(kSizeMedium),
-  hintText: 'Type your message here...',
+  hintText: "Type your message here...",
   border: InputBorder.none,
 );
 

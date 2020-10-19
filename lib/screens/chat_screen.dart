@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flash_chat/utils/constants.dart';
+import "package:flutter/material.dart";
+import "package:flutter/cupertino.dart";
+import "package:flash_chat/utils/constants.dart";
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 //Implement logout functionality
               }),
         ],
-        title: Text('⚡️Chat'),
+        title: Text("⚡️Chat"),
         backgroundColor: kPrimaryColor,
       ),
       body: SafeArea(

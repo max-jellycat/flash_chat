@@ -1,7 +1,7 @@
-import 'package:flash_chat/widgets/action_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flash_chat/utils/constants.dart';
-import 'package:flash_chat/widgets/form_input.dart';
+import "package:flash_chat/widgets/action_button.dart";
+import "package:flutter/material.dart";
+import "package:flash_chat/utils/constants.dart";
+import "package:flash_chat/widgets/form_input.dart";
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,23 +19,26 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              height: 200.0,
-              child: Image.asset('images/logo.png'),
+            Hero(
+              tag: "logo",
+              child: Container(
+                height: 200.0,
+                child: Image.asset("images/logo.png"),
+              ),
             ),
             SizedBox(
               height: kSizeHuge,
             ),
             FormInput(
               onChanged: (value) => print(value),
-              hint: 'Enter your email',
+              hint: "Enter your email",
             ),
             SizedBox(
               height: kSizeMedium,
             ),
             FormInput(
               onChanged: () {},
-              hint: 'Enter your password',
+              hint: "Enter your password",
             ),
             SizedBox(
               height: kSizeLarge,
@@ -44,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {},
               backgroundColor: kPrimaryColor,
               color: kLightColor,
-              text: 'Log In',
+              text: "Log In",
             )
           ],
         ),
