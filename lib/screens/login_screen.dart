@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/utils/router.dart';
 import "package:flash_chat/widgets/action_button.dart";
 import "package:flutter/material.dart";
 import 'package:flash_chat/utils/theme.dart';
@@ -9,6 +11,25 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
+  void onLoginHandler() async {
+    try {
+      final newUser = await _auth.signInWithEmailAndPassword(
+        email: this.email,
+        password: this.password,
+      );
+
+      if (newUser != null) {
+        Navigator.pushNamed(context, ChatScreenRoute);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,24 +51,29 @@ class _LoginScreenState extends State<LoginScreen> {
               height: kSizeHuge,
             ),
             FormInput(
-              onChanged: (value) => print(value),
+              onChanged: (value) {
+                this.email = value;
+              },
               hint: "Enter your email",
             ),
             SizedBox(
               height: kSizeMedium,
             ),
             FormInput(
-              onChanged: () {},
+              onChanged: (value) {
+                this.password = value;
+              },
               hint: "Enter your password",
+              obscureText: true,
             ),
             SizedBox(
               height: kSizeLarge,
             ),
             ActionButton(
-              onPressed: () {},
+              onPressed: this.onLoginHandler,
               backgroundColor: kPrimaryColor,
               text: "Log In",
-            )
+            ),
           ],
         ),
       ),

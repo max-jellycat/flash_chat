@@ -1,5 +1,7 @@
+import 'package:flash_chat/utils/router.dart';
 import "package:flash_chat/widgets/form_input.dart";
 import "package:flutter/material.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import 'package:flash_chat/utils/theme.dart';
 import "package:flash_chat/widgets/action_button.dart";
 
@@ -9,6 +11,25 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+  String email;
+  String password;
+
+  void onRegisterHandler() async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+        email: this.email,
+        password: this.password,
+      );
+
+      if (newUser != null) {
+        Navigator.pushNamed(context, ChatScreenRoute);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,21 +51,27 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: kSizeHuge,
             ),
             FormInput(
-              onChanged: (value) {},
+              onChanged: (value) {
+                this.email = value;
+              },
               hint: "Enter your email",
+              keyboardType: TextInputType.emailAddress,
             ),
             SizedBox(
               height: kSizeMedium,
             ),
             FormInput(
-              onChanged: (value) {},
+              onChanged: (value) {
+                this.password = value;
+              },
               hint: "Enter your password",
+              obscureText: true,
             ),
             SizedBox(
               height: kSizeLarge,
             ),
             ActionButton(
-              onPressed: () {},
+              onPressed: this.onRegisterHandler,
               backgroundColor: kAccentColor,
               text: "Register",
             )
