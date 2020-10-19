@@ -14,8 +14,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  bool isLoading = false;
 
   void onLoginHandler() async {
+    setState(() {
+      this.isLoading = true;
+    });
     try {
       final newUser = await _auth.signInWithEmailAndPassword(
         email: this.email,
@@ -73,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: this.onLoginHandler,
               backgroundColor: kPrimaryColor,
               text: "Log In",
+              isLoading: this.isLoading,
             ),
           ],
         ),

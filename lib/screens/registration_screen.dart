@@ -14,8 +14,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final _auth = FirebaseAuth.instance;
   String email;
   String password;
+  bool isLoading = false;
 
   void onRegisterHandler() async {
+    setState(() {
+      this.isLoading = true;
+    });
     try {
       final newUser = await _auth.createUserWithEmailAndPassword(
         email: this.email,
@@ -25,6 +29,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       if (newUser != null) {
         Navigator.pushNamed(context, ChatScreenRoute);
       }
+      setState(() {
+        this.isLoading = false;
+      });
     } catch (e) {
       print(e);
     }
@@ -74,6 +81,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               onPressed: this.onRegisterHandler,
               backgroundColor: kAccentColor,
               text: "Register",
+              isLoading: this.isLoading,
             )
           ],
         ),

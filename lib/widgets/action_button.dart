@@ -11,6 +11,7 @@ class ActionButton extends StatelessWidget {
   final Color color;
   final Function onPressed;
   final bool isSmall;
+  final bool isLoading;
 
   ActionButton({
     @required this.text,
@@ -18,7 +19,30 @@ class ActionButton extends StatelessWidget {
     this.backgroundColor,
     this.color,
     this.isSmall,
+    this.isLoading,
   });
+
+  Widget renderChild() {
+    if (this.isLoading != null && this.isLoading) {
+      return Container(
+        width: _kTextSize,
+        height: _kTextSize,
+        child: CircularProgressIndicator(
+          strokeWidth: 2.0,
+          valueColor: AlwaysStoppedAnimation<Color>(kLightColor),
+        ),
+      );
+    }
+
+    return Text(
+      this.text,
+      style: TextStyle(
+        color: this.color ?? kLightColor,
+        fontSize: _kTextSize,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +53,7 @@ class ActionButton extends StatelessWidget {
       fillColor: this.backgroundColor ?? kGreyColor,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Text(
-          this.text,
-          style: TextStyle(
-            color: this.color ?? kLightColor,
-            fontSize: _kTextSize,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        child: this.renderChild(),
       ),
       onPressed: this.onPressed,
     );
