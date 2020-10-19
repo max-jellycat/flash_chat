@@ -1,8 +1,9 @@
-import 'package:flash_chat/utils/router.dart';
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
 import "package:firebase_auth/firebase_auth.dart";
+import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:flash_chat/utils/theme.dart';
+import 'package:flash_chat/utils/router.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -10,8 +11,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final _store = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   User currentUser;
+  String messageValue;
 
   void getCurrentUser() {
     try {
@@ -30,9 +33,17 @@ class _ChatScreenState extends State<ChatScreen> {
     this.getCurrentUser();
   }
 
+  void onSendHandler() {
+    _store.collection('messages').add({
+      "text": this.messageValue,
+      "sender": this.currentUser.email,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kDarkColor,
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
@@ -59,15 +70,14 @@ class _ChatScreenState extends State<ChatScreen> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) {
-                        //Do something with the user input.
+                        this.messageValue = value;
                       },
+                      style: kMessageTextFieldStyle,
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
                   FlatButton(
-                    onPressed: () {
-                      //Implement send functionality.
-                    },
+                    onPressed: this.onSendHandler,
                     child: Icon(
                       CupertinoIcons.paperplane,
                       color: kAccentColor,

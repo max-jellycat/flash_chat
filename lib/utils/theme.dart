@@ -16,7 +16,14 @@ const kSizeUber = 64.0;
 const kMessageTextFieldDecoration = InputDecoration(
   contentPadding: EdgeInsets.all(kSizeMedium),
   hintText: "Type your message here...",
+  hintStyle: TextStyle(
+    color: kGreyColor,
+  ),
   border: InputBorder.none,
+);
+
+const kMessageTextFieldStyle = TextStyle(
+  color: kLightColor,
 );
 
 const kMessageContainerDecoration = BoxDecoration(
