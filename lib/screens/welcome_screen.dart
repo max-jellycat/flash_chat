@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:flash_chat/utils/router.dart";
 import "package:flash_chat/utils/constants.dart";
 import "package:flash_chat/widgets/action_button.dart";
+import "package:animated_text_kit/animated_text_kit.dart";
 
 class WelcomeScreen extends StatefulWidget {
   @override
@@ -57,9 +58,11 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: kSizeHuge,
                   ),
                 ),
-                Text(
-                  "Flash Chat",
-                  style: TextStyle(
+                TypewriterAnimatedTextKit(
+                  text: ["Flash Chat"],
+                  speed: Duration(milliseconds: 300),
+                  isRepeatingAnimation: false,
+                  textStyle: TextStyle(
                     fontSize: kSizeHuge,
                     fontWeight: FontWeight.w900,
                     color: kDarkColor,
