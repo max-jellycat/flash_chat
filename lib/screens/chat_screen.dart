@@ -1,9 +1,11 @@
+import 'package:flash_chat/widgets/message_stream.dart';
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:flash_chat/utils/theme.dart';
 import 'package:flash_chat/utils/router.dart';
+import 'package:flash_chat/widgets/message_bubble.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final _store = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
+  final messageController = TextEditingController();
   User currentUser;
   String messageValue;
 
@@ -33,47 +36,12 @@ class _ChatScreenState extends State<ChatScreen> {
       "sender": this.currentUser.email,
     });
 
-    setState(() {
-      this.messageValue = "";
-    });
+    this.messageController.clear();
   }
 
   void onLogoutHandler() {
     _auth.signOut();
     Navigator.pushNamed(context, LoginScreenRoute);
-  }
-
-  Widget renderMessages(
-      BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    if (!snapshot.hasData) {
-      return Center(
-        child: CircularProgressIndicator(
-          strokeWidth: 4.0,
-          valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
-        ),
-      );
-    }
-
-    final messages = snapshot.data.docs;
-    List<Widget> messagesWidgets = [];
-
-    for (var message in messages) {
-      final text = message.data()["text"];
-      final sender = message.data()["sender"];
-      final widget = Text(
-        "$text ($sender)",
-        style: TextStyle(
-          fontSize: kSizeHuge,
-        ),
-      );
-      messagesWidgets.add(widget);
-    }
-
-    return Expanded(
-      child: ListView(
-        children: messagesWidgets,
-      ),
-    );
   }
 
   @override
@@ -102,11 +70,7 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-              stream: _store.collection("messages").snapshots(),
-              builder: (context, snapshot) =>
-                  this.renderMessages(context, snapshot),
-            ),
+            MessageStream(store: _store),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -114,6 +78,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: this.messageController,
                       onChanged: (value) {
                         this.messageValue = value;
                       },

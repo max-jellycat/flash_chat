@@ -6,6 +6,7 @@ const kLightColor = Color(0xFFECF0F1);
 const kGreyColor = Color(0xFF95A5A6);
 const kDarkColor = Color(0xFF2C3E50);
 
+const kSizeTiny = 4.0;
 const kSizeSmall = 8.0;
 const kSizeMedium = 16.0;
 const kSizeLarge = 24.0;
@@ -23,12 +24,12 @@ const kMessageTextFieldDecoration = InputDecoration(
 );
 
 const kMessageTextFieldStyle = TextStyle(
-  color: kLightColor,
+  color: kDarkColor,
 );
 
 const kMessageContainerDecoration = BoxDecoration(
   border: Border(
-    top: BorderSide(color: kAccentColor, width: 2.0),
+    top: BorderSide(color: kPrimaryColor, width: 2.0),
   ),
 );
 
