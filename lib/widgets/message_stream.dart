@@ -1,8 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flash_chat/utils/theme.dart';
-import 'package:flash_chat/widgets/message_bubble.dart';
+import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter/material.dart";
+import "package:cloud_firestore/cloud_firestore.dart";
+import "package:flash_chat/utils/theme.dart";
+import "package:flash_chat/widgets/message_bubble.dart";
 
 class MessageStream extends StatelessWidget {
   const MessageStream({

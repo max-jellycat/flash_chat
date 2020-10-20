@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import 'package:flash_chat/utils/debouncer.dart';
-
-import '../utils/theme.dart';
+import "package:flash_chat/utils/debouncer.dart";
+import "package:flash_chat/utils/theme.dart";
 
 class FormInput extends StatefulWidget {
   final Function onChanged;

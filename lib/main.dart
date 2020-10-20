@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:firebase_core/firebase_core.dart';
+import "package:firebase_core/firebase_core.dart";
 import "package:flash_chat/utils/router.dart";
 import "package:flash_chat/screens/welcome_screen.dart";
 import "package:flash_chat/screens/login_screen.dart";
@@ -17,7 +17,7 @@ class _FlashChatState extends State<FlashChat> {
   Future<void> initFirebase() async {
     FirebaseApp app = await Firebase.initializeApp();
     assert(app != null);
-    print('Initialized default app $app');
+    print("Initialized default app $app");
   }
 
   @override

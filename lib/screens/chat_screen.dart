@@ -1,11 +1,10 @@
-import 'package:flash_chat/widgets/message_stream.dart';
+import "package:flash_chat/widgets/message_stream.dart";
 import "package:flutter/material.dart";
 import "package:flutter/cupertino.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:cloud_firestore/cloud_firestore.dart";
-import 'package:flash_chat/utils/theme.dart';
-import 'package:flash_chat/utils/router.dart';
-import 'package:flash_chat/widgets/message_bubble.dart';
+import "package:flash_chat/utils/theme.dart";
+import "package:flash_chat/utils/router.dart";
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -31,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void onSendHandler() {
-    _store.collection('messages').add({
+    _store.collection("messages").add({
       "text": this.messageValue,
       "sender": this.currentUser.email,
     });

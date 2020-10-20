@@ -1,4 +1,4 @@
-import 'package:flash_chat/utils/theme.dart';
+import "package:flash_chat/utils/theme.dart";
 import "package:flutter/material.dart";
 
 const _kElevation = 6.0;

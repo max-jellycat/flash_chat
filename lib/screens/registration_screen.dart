@@ -1,8 +1,8 @@
-import 'package:flash_chat/utils/router.dart';
+import "package:flash_chat/utils/router.dart";
 import "package:flash_chat/widgets/form_input.dart";
 import "package:flutter/material.dart";
 import "package:firebase_auth/firebase_auth.dart";
-import 'package:flash_chat/utils/theme.dart';
+import "package:flash_chat/utils/theme.dart";
 import "package:flash_chat/widgets/action_button.dart";
 
 class RegistrationScreen extends StatefulWidget {

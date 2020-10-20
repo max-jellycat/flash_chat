@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flash_chat/utils/router.dart";
-import 'package:flash_chat/utils/theme.dart';
+import "package:flash_chat/utils/theme.dart";
 import "package:flash_chat/widgets/action_button.dart";
 import "package:animated_text_kit/animated_text_kit.dart";
 
