@@ -27,41 +27,86 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  void onSendHandler() {
+    _store.collection('messages').add({
+      "text": this.messageValue,
+      "sender": this.currentUser.email,
+    });
+
+    setState(() {
+      this.messageValue = "";
+    });
+  }
+
+  void onLogoutHandler() {
+    _auth.signOut();
+    Navigator.pushNamed(context, LoginScreenRoute);
+  }
+
+  Widget renderMessages(
+      BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+    if (!snapshot.hasData) {
+      return Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 4.0,
+          valueColor: AlwaysStoppedAnimation<Color>(kPrimaryColor),
+        ),
+      );
+    }
+
+    final messages = snapshot.data.docs;
+    List<Widget> messagesWidgets = [];
+
+    for (var message in messages) {
+      final text = message.data()["text"];
+      final sender = message.data()["sender"];
+      final widget = Text(
+        "$text ($sender)",
+        style: TextStyle(
+          fontSize: kSizeHuge,
+        ),
+      );
+      messagesWidgets.add(widget);
+    }
+
+    return Expanded(
+      child: ListView(
+        children: messagesWidgets,
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     this.getCurrentUser();
   }
 
-  void onSendHandler() {
-    _store.collection('messages').add({
-      "text": this.messageValue,
-      "sender": this.currentUser.email,
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kDarkColor,
+      backgroundColor: kLightColor,
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                _auth.signOut();
-                Navigator.pushNamed(context, LoginScreenRoute);
-              }),
+            icon: Icon(CupertinoIcons.square_arrow_left),
+            onPressed: this.onLogoutHandler,
+          ),
         ],
         title: Text("⚡️Chat"),
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kAccentColor,
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+              stream: _store.collection("messages").snapshots(),
+              builder: (context, snapshot) =>
+                  this.renderMessages(context, snapshot),
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -80,7 +125,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     onPressed: this.onSendHandler,
                     child: Icon(
                       CupertinoIcons.paperplane,
-                      color: kAccentColor,
+                      color: kPrimaryColor,
                     ),
                   ),
                 ],
