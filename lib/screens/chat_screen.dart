@@ -62,7 +62,12 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: this.onLogoutHandler,
           ),
         ],
-        title: Text("⚡️Chat"),
+        title: Text(
+          "Chat",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         backgroundColor: kAccentColor,
       ),
       body: SafeArea(
@@ -70,7 +75,10 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessageStream(store: _store),
+            MessageStream(
+              store: _store,
+              currentUser: this.currentUser,
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(

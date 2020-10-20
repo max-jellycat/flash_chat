@@ -4,15 +4,31 @@ import "package:flash_chat/utils/theme.dart";
 class MessageBubble extends StatelessWidget {
   final String sender;
   final String text;
+  final bool isMe;
 
-  MessageBubble({this.sender, this.text});
+  MessageBubble({this.sender, this.text, this.isMe});
+
+  BorderRadius setBubbleShape() {
+    return this.isMe
+        ? BorderRadius.only(
+            topLeft: Radius.circular(kSizeLarger),
+            bottomLeft: Radius.circular(kSizeLarger),
+            bottomRight: Radius.circular(kSizeLarger),
+          )
+        : BorderRadius.only(
+            topRight: Radius.circular(kSizeLarger),
+            bottomLeft: Radius.circular(kSizeLarger),
+            bottomRight: Radius.circular(kSizeLarger),
+          );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(kSizeSmall),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment:
+            this.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             this.sender,
@@ -23,9 +39,9 @@ class MessageBubble extends StatelessWidget {
           ),
           SizedBox(height: kSizeSmall),
           Material(
-            color: kAccentColor,
+            color: this.isMe ? kAccentColor : Colors.white,
             elevation: 4.0,
-            borderRadius: BorderRadius.circular(kSizeLarger),
+            borderRadius: this.setBubbleShape(),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: kSizeMedium,
@@ -34,7 +50,7 @@ class MessageBubble extends StatelessWidget {
               child: Text(
                 this.text,
                 style: TextStyle(
-                  color: kLightColor,
+                  color: this.isMe ? kLightColor : kDarkColor,
                   fontSize: kSizeMedium,
                 ),
               ),
